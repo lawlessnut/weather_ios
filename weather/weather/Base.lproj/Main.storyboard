@@ -63,6 +63,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="Btl-uf-USR" secondAttribute="height" multiplier="191:138" id="aO0-eT-R3j"/>
                                 </constraints>
+                                <variation key="widthClass=regular" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="184" y="265" width="191" height="0.0"/>
+                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="US" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kag-pe-ptV">
                                 <rect key="frame" x="20" y="423" width="59" height="21"/>
@@ -127,6 +130,18 @@
                                     <constraint firstAttribute="height" constant="72" id="ySM-B9-6GK"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="L" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2B-9G-ylG">
+                                <rect key="frame" x="93" y="230" width="10" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="H" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wpc-S2-T3k">
+                                <rect key="frame" x="93" y="201" width="13" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -151,11 +166,15 @@
                             <constraint firstItem="9Uy-FO-5bK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="QVo-3b-uYH"/>
                             <constraint firstItem="SnR-qD-iAa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qn7-Gp-Kyt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1TF-dM-qGR" secondAttribute="bottom" id="R48-dc-GuO"/>
+                            <constraint firstItem="M2B-9G-ylG" firstAttribute="leading" secondItem="KiB-Pt-0S7" secondAttribute="trailing" constant="20" id="RSk-HZ-QLl"/>
                             <constraint firstItem="9Uy-FO-5bK" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="VXv-C1-tad"/>
                             <constraint firstItem="3cB-3m-Mda" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Vyf-i3-IJu"/>
                             <constraint firstItem="qiL-dJ-OxB" firstAttribute="top" secondItem="jED-aq-dhn" secondAttribute="bottom" constant="15" id="XCB-CO-cmt"/>
+                            <constraint firstItem="M2B-9G-ylG" firstAttribute="top" secondItem="Wpc-S2-T3k" secondAttribute="bottom" constant="4" id="a7z-oU-mR6"/>
+                            <constraint firstItem="Wpc-S2-T3k" firstAttribute="leading" secondItem="KiB-Pt-0S7" secondAttribute="trailing" constant="20" id="aMZ-W9-bMq"/>
                             <constraint firstItem="y31-B2-aEL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="22" id="asw-Z6-Gkg"/>
                             <constraint firstItem="1TF-dM-qGR" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="c9k-e8-aKx"/>
+                            <constraint firstItem="1wM-wa-Bdi" firstAttribute="top" secondItem="M2B-9G-ylG" secondAttribute="bottom" constant="40" id="f0d-BK-ECb"/>
                             <constraint firstItem="y31-B2-aEL" firstAttribute="top" secondItem="ihi-gU-Cey" secondAttribute="bottom" constant="15" id="fCx-bq-jgL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Fh-NZ-7IJ" secondAttribute="trailing" constant="9" id="fO0-fO-YIR"/>
                             <constraint firstItem="Th8-Pu-J7g" firstAttribute="top" secondItem="KiB-Pt-0S7" secondAttribute="bottom" constant="75" id="gb0-Qg-8GN"/>
@@ -189,6 +208,8 @@
                         <outlet property="day3Image" destination="jED-aq-dhn" id="cUR-d8-yHA"/>
                         <outlet property="day3Label" destination="8Fh-NZ-7IJ" id="5C1-6e-kQe"/>
                         <outlet property="day3Temp" destination="qiL-dJ-OxB" id="CrI-vR-191"/>
+                        <outlet property="dayHightTemp" destination="Wpc-S2-T3k" id="omT-wv-mgZ"/>
+                        <outlet property="dayLowTemp" destination="M2B-9G-ylG" id="UqN-cl-Bvj"/>
                         <outlet property="firstUIView" destination="9Uy-FO-5bK" id="lXS-tB-qgU"/>
                         <outlet property="tempLabel" destination="KiB-Pt-0S7" id="V56-q8-eiO"/>
                         <outlet property="weatherIcon" destination="Btl-uf-USR" id="DzD-np-D2y"/>
@@ -196,7 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="379.5" y="315.5"/>
+            <point key="canvasLocation" x="378.5" y="315.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="0HP-PQ-Tvu">
