@@ -29,6 +29,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     var cloud = NSInteger()
     
+    var imageUitl = ImageUtil()
+    
     var currentUnixTimeStamp = NSDate().timeIntervalSince1970
     
     @IBOutlet var tempLabel: UILabel!
@@ -61,10 +63,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet var day3Temp: UILabel!
     
+    @IBOutlet var dayHightTemp: UILabel!
+    
+    @IBOutlet var dayLowTemp: UILabel!
+    
+//    @IBOutlet var tempUnitLabel: UILabel!
     
     var threeDayForcastDictionary = NSDictionary()
     
     var unitLabel : UILabel = UILabel()
+    
     var firstViewColor1 : UIColor = UIColor()
     
     var firstViewColor2 : UIColor = UIColor()
@@ -158,6 +166,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 
                 for (key,value) in weatherDataDictionary {
                     
+//                    if weatherDataDictionary["cod"] as! NSInteger == 404{
+//                        return
+//                    }
+                    
                     let cloudDict:NSDictionary = weatherDataDictionary["clouds"] as! NSDictionary
                     self.cloud = cloudDict["all"] as! NSInteger
                     
@@ -172,6 +184,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                     
                     self.weatherDict = weatherDataDictionary["weather"] as! NSArray
                     
+                    self.dayHightTemp.text = String("H: \(mainDict["temp_max"] as! NSInteger) F")
+                    self.dayLowTemp.text = String("L: \(mainDict["temp_min"] as! NSInteger) F")
+                    
                     print("SUN RISE \(self.sunRise) SUN SET \(self.sunSet) CURRENT TIME \(self.currentUnixTimeStamp)")
                     
                     
@@ -179,10 +194,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 
                 dispatch_async(dispatch_get_main_queue(),{
                     
+                    //                    self.todayTempMax.text =
                     
                     self.tempLabel.text! = String(temperature)
                     
-                    self.tempLabel.text = self.tempLabel.text! + "\u{00B0}" + self.unitLabel.text!
+                    //                    self.tempLabel.text = self.tempLabel.text! + "\u{00B0}" + self.unitLabel.text!
+                    self.tempLabel.text = self.tempLabel.text! + "\u{00B0}"
                     
                     self.currentLocationName.text = cityName;
                     
@@ -213,6 +230,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                             
                             self.weatherIcon.image = self.getNightIconInfornation(self.cloud)
                             
+                        } else {
+                            var id = self.weatherDict[0]["id"] as! NSInteger
+                            
+                            print("ID \(id)")
+                            
+                            self.weatherIcon.image = self.imageUitl.getWeatherImageBasedOnCondition(id)
                         }
                         
                     } else {
@@ -255,12 +278,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     func configureGradientBackground(colors:CGColorRef...){
         
         let gradient: CAGradientLayer = CAGradientLayer()
+        
         let maxWidth = max(self.view.bounds.size.height,self.view.bounds.size.width)
+        //
         let squareFrame = CGRect(origin: self.firstUIView.bounds.origin, size: CGSizeMake(maxWidth, maxWidth))
+        //        let squareFrame = CGRect(x: 20, y: 20, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
+        
         gradient.frame = squareFrame
         
         gradient.colors = colors
+        
+        //        CGContextDrawLinearGradient(<#T##c: CGContext?##CGContext?#>, <#T##gradient: CGGradient?##CGGradient?#>, <#T##startPoint: CGPoint##CGPoint#>, <#T##endPoint: CGPoint##CGPoint#>, <#T##options: CGGradientDrawingOptions##CGGradientDrawingOptions#>)
+        
+        
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x:0,y:1)
+        
+        
         self.view.layer.insertSublayer(gradient, atIndex: 0)
+        
     }
     
     func convertStringToDictionary(text:NSString) -> [String:AnyObject]? {
@@ -488,7 +524,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     func dayStringFromTime(time:Double) -> String{
         
         let dateFormatter = NSDateFormatter()
-
+        
         let date = NSDate(timeIntervalSince1970: time)
         
         dateFormatter.locale = NSLocale(localeIdentifier: NSLocale.currentLocale().localeIdentifier)
@@ -507,15 +543,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         print("TYPE WEATHER ==> \(main)")
         
-        if main == "Rain" {
-            
-            uiImage = self.getMorningRain(cloud)
-            
-        } else if main == "Clear" {
-            
-            uiImage = self.getMorningIconInformation(cloud)
-            
-        }
+        uiImage = imageUitl.getWeatherImageBasedOnCondition(weather[0]["id"] as! NSInteger)
+
+//        
+//        if main == "Rain" {
+//            
+//            uiImage = self.getMorningRain(cloud)
+//            
+//        } else if main == "Clear" {
+//            
+//            uiImage = self.getMorningIconInformation(cloud)
+//            
+//        } else {
+//                    }
         
         return uiImage
     }
@@ -524,6 +564,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func motionBegan(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        print("shake begin app")
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        print("shake app")
+        self.viewDidLoad()
+    }
+    
     
     
 }

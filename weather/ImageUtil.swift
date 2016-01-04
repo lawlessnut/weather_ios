@@ -70,7 +70,7 @@ class ImageUtil {
             
             weatherIcon = UIImage(named:"39")!
             
-        case 502,203,504,522,531:
+        case 502,503,504,522,531:
             
             weatherIcon = UIImage(named:"12")!
             
