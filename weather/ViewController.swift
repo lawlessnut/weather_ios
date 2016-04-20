@@ -146,7 +146,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         var cityName : String!
         
         
-        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=2de143494c0b295cca9337e1e96b00e0&units=imperial")!
+        let url = NSURL(string:"http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=(apikey)&units=imperial")!
         
         print(url)
         
